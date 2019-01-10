@@ -1,6 +1,6 @@
 # Testimonials Gutenberg Blocks
 
-Create beautiful step section on your website. 
+Create beautiful testimonial section on your website. 
 To be used with WordPress Gutenberg.
 
 
@@ -9,7 +9,7 @@ To be used with WordPress Gutenberg.
 <b>Block is easy customizable:</b>
 
 <ul>
-<li>Change steps, font, hover colors</li>
+<li>Change font, hover colors</li>
 <li>Adjust font size</li>
 <li>Create multiple rows</li>
 <li>Increase offset between blocks</li>
