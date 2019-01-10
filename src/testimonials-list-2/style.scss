@@ -1,0 +1,94 @@
+.kenzap .kenzap-testimonials-2 p,
+.kenzap .kenzap-testimonials-2 span{
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  border: none;
+  text-decoration: none;
+}
+
+.kenzap .kenzap-testimonials-2 .kenzap-container{
+  max-width:1170px;
+  padding:0 15px;
+  margin:0 auto;
+}
+
+.kenzap .kenzap-testimonials-2{
+  padding: 0;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position:relative;
+}
+
+.kenzap .kenzap-testimonials-2.autoPadding {
+  padding: calc(var(--paddingsMinPx) + (var(--paddings) - var(--paddingsMin)) * ((100vw - 300px) / (1600 - 300))) 0;
+}
+
+.kenzap .kenzap-testimonials-2 .testimonial-box{
+  text-align:center;
+  margin:0 0 20px;
+}
+
+.kenzap .kenzap-testimonials-2 .testimonial-box .testimonial-icon {
+  content: "";
+  display:block;
+  width:46px;
+  height:30px;
+  background:url(./testimonials-list-2/quote-icon.svg) no-repeat center center;
+  background-size: cover;
+  margin:0 auto 15px;
+  opacity:.5;
+}
+
+.kenzap .kenzap-testimonials-2 .testimonial-box .testimonial-content p{
+  font-family: 'Muli', sans-serif;
+  line-height:33px;
+  font-size:22px;
+  font-weight:400;
+  color:#fff;
+  margin:0 0 20px;
+}
+
+.kenzap .kenzap-testimonials-2 .testimonial-box .testimonial-content span{
+  font-family: 'Muli', sans-serif;
+  line-height:22px;
+  font-size:14px;
+  color:#fff;
+  font-weight:700;
+  margin:0;
+  padding:0;
+  position:relative
+}
+
+.kenzap .kenzap-testimonials-2 .owl-dots{
+  margin:0;
+  display:block;
+  text-align:center
+}
+
+.kenzap .kenzap-testimonials-2 .owl-dot{
+  margin:0 4px;
+  height:20px;
+  width:12px;
+  box-shadow: none;
+}
+
+.kenzap .kenzap-testimonials-2 .owl-dot span{
+  display: block;
+  box-sizing: border-box;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .5);
+  text-indent: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: opacity .4s ease-out;
+}
+
+.kenzap .kenzap-testimonials-2 .owl-dot.active span{
+  background: rgba(255, 255, 255, 1);
+}
+
