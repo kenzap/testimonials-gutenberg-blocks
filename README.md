@@ -1,4 +1,4 @@
-# Testimonials Gutenberg Blocks
+# Statistics Gutenberg Blocks
 
 Create beautiful testimonial section on your website. 
 To be used with WordPress Gutenberg.
