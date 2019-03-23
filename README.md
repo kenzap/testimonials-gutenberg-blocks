@@ -1,10 +1,9 @@
-# Statistics Gutenberg Blocks
+# Testimonals Gutenberg Blocks
 
 Create beautiful testimonial section on your website. 
 To be used with WordPress Gutenberg.
 
-
-![Create beatiful testimonials section with Gutenberg](https://kenzap.com/website/img/stats-1.png)
+![Create beatiful testimonials section with Gutenberg](https://kenzap.com/website/img/testimonials-2.png)
 
 <b>Block is easy customizable:</b>
 
