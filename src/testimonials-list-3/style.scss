@@ -20,7 +20,7 @@
 }
 
 .kenzap .kenzap-testimonials-3.autoPadding {
-  padding: calc(var(--paddingsMinPx) + (var(--paddings) - var(--paddingsMin)) * ((100vw - 300px) / (1600 - 300))) 0;
+  padding: calc(var(--paddingsMinPx) + (var(--paddings) - var(--paddingsMin)) * ((100vw - 300px) / (1600 - 300))) var(--paddings2,0);
 }
 
 .kenzap .kenzap-testimonials-3 .testimonial-box{

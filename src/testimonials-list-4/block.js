@@ -13,35 +13,36 @@ import Edit from './edit';
  * @type {{title: string, icon: string, iconMediaId: string, iconMediaUrl: string, description: string}}
  */
 export const defaultItem = {
-    testimonial: __( 'New testimonial', 'kenzap-testimonials' ),
-    author: __( 'John Doe', 'kenzap-testimonials' ),
+    testimonial: __( '<em>Sagittis nisl rhoncus vitae nunc sed velit dignissim, rhoncus urna curabitur</em>', 'kenzap-testimonials' ),
+    author: __( 'Karl Thomas / Photographer', 'kenzap-testimonials' ),
+    imageId: '',
+    imageUrl: '',
 };
 
 export const defaultSubBlocks = JSON.stringify( [
     {
-        testimonial: __( 'Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam integer. Curabitur blandit tempus.', 'kenzap-testimonials' ),
-        author: __( '- Barclay Widerski', 'kenzap-testimonials' ),
+        testimonial: __( '<em>Sagittis nisl rhoncus vitae nunc sed velit dignissim, rhoncus urna curabitur</em>', 'kenzap-testimonials' ),
+        author: __( 'Nicolas Brown, Instructor', 'kenzap-testimonials' ),
+        imageId: '',
+        imageUrl: window.kenzap_testimonials_gutenberg_path + 'testimonials-list-4/testimonial-img-1.png',
         key: new Date().getTime() + 1,
     }, {
-        testimonial: __( 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Vestibulum id ligula porta felis euismod semper. Cras justo odio, dapibus ac facilisis in, egestas eget quam aenean lacinia.', 'kenzap-testimonials' ),
-        author: __( '- Coriss Ambady', 'kenzap-testimonials' ),
+        testimonial: __( '<em>Sagittis nisl rhoncus rhoncus urna curabitur vitae nunc sed velit dignissim</em>', 'kenzap-testimonials' ),
+        author: __( 'Agnes Gibbs / Designer', 'kenzap-testimonials' ),
+        imageId: '',
+        imageUrl: window.kenzap_testimonials_gutenberg_path + 'testimonials-list-4/testimonial-img-2.png',
         key: new Date().getTime() + 2,
     }, {
-        testimonial: __( 'Sed posuere consectetur est at lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula lacinia odio sem nec elit.', 'kenzap-testimonials' ),
-        author: __( '- Conor Gibson', 'kenzap-testimonials' ),
-
+        testimonial: __( '<em>Curabitur vitae nunc sed velit dignissim, sagittis nisl rhoncus rhoncus urna</em>', 'kenzap-testimonials' ),
+        author: __( 'Frank Cardenas / Senior Designer', 'kenzap-testimonials' ),
+        imageId: '',
+        imageUrl: window.kenzap_testimonials_gutenberg_path + 'testimonials-list-4/testimonial-img-3.png',
         key: new Date().getTime() + 3,
     },
 ] );
 
 export const attrs = {
         ...blockProps,
-        
-        align: {
-            type: 'string',
-            default: 'full',
-        },
-
         // override from container
         containerPadding: {
             type: 'number',
@@ -49,32 +50,34 @@ export const attrs = {
         },
 
         // override from container
-        backgroundImage: {
-            type: 'string',
-            default: window.kenzap_testimonials_gutenberg_path + 'testimonials-list-2/testimonials-bg.jpg',
-        },
-
-        testimonialSize: {
-            type: 'number',
-            default: 22,
-        },
-
-        authorSize: {
-            type: 'number',
-            default: 14,
-        },
-
-        textColor: {
+        backgroundColor: {
             type: 'string',
             default: '#fff',
         },
 
-        icon: {
-            type: 'object',
-            default: {
-                iconMediaId: '',
-                iconMediaUrl: window.kenzap_testimonials_gutenberg_path + 'testimonials-list-2/quote-icon.svg',
-            },
+        testimonialSize: {
+            type: 'number',
+            default: 30,
+        },
+
+        authorSize: {
+            type: 'number',
+            default: 16,
+        },
+
+        imgHeight: {
+            type: 'number',
+            default: 509,
+        },
+
+        testimonialColor: {
+            type: 'string',
+            default: '#000',
+        },
+
+        authorColor: {
+            type: 'string',
+            default: '#9c9c9c',
         },
 
         items: {
@@ -117,9 +120,20 @@ export const getStyles = attributes => {
     };
 
     return {
-        vars,
         kenzapContanerStyles,
+        vars,
     };
+};
+
+export const sanitizeAttr = ( val ) => {
+    return typeof( val ) === 'undefined' ?
+        '' :
+        val
+            .replace( /&/g, '&amp;' )
+            .replace( /</g, '&lt;' )
+            .replace( />/g, '&gt;' )
+            .replace( /"/g, '&quot;' )
+            .replace( /'/g, '&#039' );
 };
 
 /**
@@ -128,19 +142,19 @@ export const getStyles = attributes => {
 export const typographyArr = JSON.stringify([
     {
         'title': __( '- Testimonial', 'kenzap-testimonials' ),
-        'font-size': 22,
+        'font-size': 30,
         'font-weight': 4,
-        'line-height': 30,
-        'margin-bottom': 20,
-        //'color':'-'
+        'line-height': 43,
+        'margin-bottom': 30,
+        'color':'#333333'
     },
     {
         'title': __( '- Author', 'kenzap-testimonials' ),
-        'font-size': 14,
-        'font-weight': 5,
-        'line-height': 19,
-        'margin-bottom': 20,
-        //'color':'-'
+        'font-size': 16,
+        'font-weight': 4,
+        'line-height': 20,
+        'margin-bottom': 30,
+        'color':'#9c9c9c'
     },
 ]);
 
@@ -157,8 +171,8 @@ export const typographyArr = JSON.stringify([
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType( 'kenzap/testimonials-list-2', {
-    title: __( 'Kenzap Testimonials List 2', 'kenzap-testimonials' ),
+registerBlockType( 'kenzap/testimonials-list-4', {
+    title: __( 'Kenzap Testimonials List 4', 'kenzap-testimonials' ),
     icon: 'yes',
     category: 'layout',
     keywords: [
@@ -177,7 +191,7 @@ registerBlockType( 'kenzap/testimonials-list-2', {
                 items: [ ...JSON.parse( defaultSubBlocks ) ],
                 isFirstLoad: false,
             } );
-
+            // TODO It is very bad solution to avoid low speed working of setAttributes function
             props.attributes.items = JSON.parse( defaultSubBlocks );
             if ( ! props.attributes.blockUniqId ) {
                 props.setAttributes( {
@@ -209,38 +223,41 @@ registerBlockType( 'kenzap/testimonials-list-2', {
             attributes,
         } = props;
 
+        const { vars, kenzapContanerStyles } = getStyles( props.attributes );
+
         Object.keys( attributes ).forEach( attr => {
             if ( typeof attributes[ attr ] === 'undefined' ) {
                 attributes[ attr ] = attrs[ attr ].default;
             }
         } );
 
-        const { vars, kenzapContanerStyles } = getStyles( props.attributes );
-
         return (
             <div className={ className ? className : '' } style={ vars }>
                 <ContainerSave
-                    className={ `kenzap-testimonials-2 block-${ attributes.blockUniqId }` }
+                    className={ `kenzap-testimonials-4 block-${ attributes.blockUniqId }` }
                     attributes={ attributes }
-                    style={ vars }
                     withBackground
                     withPadding
                 >
                     <div className="kenzap-container" style={ kenzapContanerStyles }>
                         { attributes.nestedBlocks == 'top' && <InnerBlocks.Content /> }
+                        <div id="owl-dots" className="owl-dots">
+                            { attributes.items && attributes.items.map( ( item, index ) => (
+                                <div key={ item.key } style={ { height: `${ attributes.imgHeight }px`, maxHeight: '100%' } } className={ `owl-dot ${ index === 0 ? 'active' : '' }` }>
+                                    <img src={ item.imageUrl } alt={ sanitizeAttr(item.author) } />
+                                </div>
+                            ) ) }
+                        </div>
                         <div className="owl-carousel">
                             { attributes.items && attributes.items.map( item => (
                                 <div
                                     key={ item.key }
                                     className="testimonial-box"
                                 >
-                                    <div className="testimonial-content">
-                                        <div
-                                            style={ { backgroundImage: attributes.icon.iconMediaUrl !== 'none' ? `url(${ attributes.icon.iconMediaUrl })` : 'none' } }
-                                            className="testimonial-icon"
-                                        />
+                                    <div className="kp-content">
                                         <RichText.Content
-                                            tagName="p"
+                                            tagName="div"
+                                            className="kp-p"
                                             value={ item.testimonial }
                                             style={ getTypography( attributes, 0 ) }
                                         />

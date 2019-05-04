@@ -1,15 +1,20 @@
-const { __ } = wp.i18n; // Import __() from wp.i18n
+const { __ } = wp.i18n; 
 const { RangeControl, CheckboxControl, SelectControl, RadioControl, PanelBody, Button } = wp.components;
 const { Component, Fragment } = wp.element;
-const { MediaUpload, PanelColorSettings } = wp.editor;
+const { MediaUpload, PanelColorSettings, InnerBlocks } = wp.editor;
 
 export const blockProps = {
     containerMaxWidth: {
-        type: 'number',
-        default: 1170,
+        type: 'string',
+        default: '1170',
     },
 
     containerPadding: {
+        type: 'number',
+        default: 0,
+    },
+
+    containerSidePadding: {
         type: 'number',
         default: 0,
     },
@@ -34,14 +39,18 @@ export const blockProps = {
         default: false,
     },
 
+    parallax: {
+        type: 'boolean',
+        default: false,
+    },
+
     backgroundColor: {
         type: 'string',
-        default: '#313131',
     },
 
     backgroundImage: {
         type: 'string',
-        default: '',
+        default: 'none',
     },
 
     backgroundImageId: {
@@ -63,6 +72,15 @@ export const blockProps = {
         type: 'string',
         default: '',
     },
+
+    nestedBlocks: {
+        type: 'string',
+        default: '',
+    },
+
+    uniqueID: {
+        type: 'string',
+    },
 };
 
 /**
@@ -81,21 +99,24 @@ export class InspectorContainer extends Component {
             alignment,
             setAttributes,
             width100,
+            parallax,
             withWidth100 = false,
             withPadding = false,
             containerPadding,
+            containerSidePadding,
             autoPadding = '',
+            nestedBlocks = '',
         } = this.props;
 
         return (
             <Fragment>
                 { withBackground &&
                 <PanelBody
-                    title={ __( 'Background', 'kenzap-testimonials' ) }
+                    title={ __( 'Background' ) }
                     initialOpen={ false }
                 >
                     <PanelColorSettings
-                        title={ __( 'Background Color', 'kenzap-testimonials' ) }
+                        title={ __( 'Color' ) }
                         initialOpen={ true }
                         colorSettings={ [
                                 {
@@ -103,12 +124,12 @@ export class InspectorContainer extends Component {
                                     onChange: ( value ) => {
                                         return setAttributes( { backgroundColor: value } );
                                     },
-                                    label: __( 'Selected', 'kenzap-testimonials' ),
+                                    label: __( 'Selected' ),
                                 },
                             ] }
                     />
 
-                    <p style={ { marginBottom: '5px' } }>{ __( 'Background image', 'kenzap-testimonials' ) }</p>
+                    <p style={ { marginBottom: '5px' } }>{ __( 'Image' ) }</p>
                     <MediaUpload
                         onSelect={ ( media ) => {
                                 this.props.setAttributes( {
@@ -131,7 +152,7 @@ export class InspectorContainer extends Component {
                                                 } );
                                             } }
                                         >
-                                            { __( 'Remove', 'kenzap-testimonials' ) }
+                                            { __( 'Remove' ) }
                                         </Button>
                                         <div
                                             style={ {
@@ -147,7 +168,7 @@ export class InspectorContainer extends Component {
                                     </Fragment>
                                 ) : (
                                     <Button isDefault onClick={ mediaUploadProps.open }>
-                                        { __( 'Upload/Choose', 'kenzap-testimonials' ) }
+                                        { __( 'Upload/Choose' ) }
                                     </Button>
                                 ) }
                             </Fragment>
@@ -156,52 +177,63 @@ export class InspectorContainer extends Component {
                         />
 
                     <p style={ { fontStyle: 'italic' } }>
-                        { __( 'Override background color with image. Transparent images may also apply.', 'kenzap-testimonials' ) }
+                        { __( 'Override background color with image. Transparent images may also apply.' ) }
                     </p>
 
                     <SelectControl
-                        label={ __( 'Background style', 'kenzap-testimonials' ) }
+                        label={ __( 'Style' ) }
                         value={ backgroundRepeat }
                         options={ [
-                                { label: __( 'default', 'kenzap-testimonials' ), value: 'default' },
-                                { label: __( 'contain', 'kenzap-testimonials' ), value: 'contain' },
-                                { label: __( 'cover', 'kenzap-testimonials' ), value: 'cover' },
-                                { label: __( 'repeated', 'kenzap-testimonials' ), value: 'repeated' },
+                                { label: __( 'default' ), value: 'default' },
+                                { label: __( 'contain' ), value: 'contain' },
+                                { label: __( 'cover' ), value: 'cover' },
+                                { label: __( 'repeated' ), value: 'repeat' },
                             ] }
                         onChange={ ( value ) => {
                                 setAttributes( { backgroundStyle: value } );
                             } }
-                        help={ __( 'Choose how to align background image', 'kenzap-testimonials' ) }
+                        help={ __( 'Choose how to align background image' ) }
                         />
 
                     <SelectControl
-                        label={ __( 'Background position', 'kenzap-testimonials' ) }
+                        label={ __( 'Position' ) }
                         value={ backgroundPosition }
                         options={ [
-                                { label: __( 'left top', 'kenzap-testimonials' ), value: 'left top' },
-                                { label: __( 'left center', 'kenzap-testimonials' ), value: 'left center' },
-                                { label: __( 'left bottom', 'kenzap-testimonials' ), value: 'left bottom' },
-                                { label: __( 'right top', 'kenzap-testimonials' ), value: 'right top' },
-                                { label: __( 'right center', 'kenzap-testimonials' ), value: 'right center' },
-                                { label: __( 'right bottom', 'kenzap-testimonials' ), value: 'right bottom' },
-                                { label: __( 'center top', 'kenzap-testimonials' ), value: 'center top' },
-                                { label: __( 'center center', 'kenzap-testimonials' ), value: 'center center' },
-                                { label: __( 'center bottom', 'kenzap-testimonials' ), value: 'center bottom' },
+                                { label: __( 'left top' ), value: 'left top' },
+                                { label: __( 'left center' ), value: 'left center' },
+                                { label: __( 'left bottom' ), value: 'left bottom' },
+                                { label: __( 'right top' ), value: 'right top' },
+                                { label: __( 'right center' ), value: 'right center' },
+                                { label: __( 'right bottom' ), value: 'right bottom' },
+                                { label: __( 'center top' ), value: 'center top' },
+                                { label: __( 'center center' ), value: 'center center' },
+                                { label: __( 'center bottom' ), value: 'center bottom' },
                             ] }
                         onChange={ ( value ) => {
                                 setAttributes( { backgroundPosition: value } );
                             } }
-                        help={ __( 'Sets the starting position of a background image', 'kenzap-testimonials' ) }
+                        help={ __( 'Sets the starting position of a background image' ) }
                         />
+
+                    <CheckboxControl
+                        label={ __( 'Parallax' ) }
+                        checked={ parallax }
+                        onChange={ ( parallax ) => {
+                            setAttributes( {
+                                parallax: parallax,
+                            } );
+                        } }
+                        help={ __( 'Background image behaviour during scroll.' ) }
+                    />
                 </PanelBody>
                 }
 
                 <PanelBody
-                    title={ __( 'Container', 'kenzap-testimonials' ) }
+                    title={ __( 'Container' ) }
                     initialOpen={ false }
                 >
                     <RadioControl
-                        label={ __( 'Alignment', 'kenzap-testimonials' ) }
+                        label={ __( 'Alignment' ) }
                         selected={ alignment }
                         options={ [
                             { label: 'Default', value: '' },
@@ -210,57 +242,78 @@ export class InspectorContainer extends Component {
                         onChange={ ( value ) => {
                             setAttributes( { alignment: value } );
                         } }
-                        help={ __( 'Full Width may not work properly with all layout types including layouts with sidebars', 'kenzap-testimonials' ) }
+                        help={ __( 'Full Width may not work properly with all layout types including layouts with sidebars' ) }
                     />
 
                     { ! width100 &&
                     <RangeControl
-                        label={ __( 'Max width', 'kenzap-testimonials' ) }
-                        value={ containerMaxWidth }
-                        onChange={ ( value ) => setAttributes( { containerMaxWidth: value } ) }
+                        label={ __( 'Max width' ) }
+                        value={ Number( containerMaxWidth ) }
+                        onChange={ ( value ) => setAttributes( { containerMaxWidth: `${ value }` } ) }
                         min={ 300 }
                         max={ 2000 }
-                        help={ __( 'Restrict layout width for content children.', 'kenzap-testimonials' ) }
+                        help={ __( 'Restrict layout width for content children.' ) }
                     />
                     }
 
                     { withWidth100 &&
                     <CheckboxControl
-                        label={ __( 'No restriction', 'kenzap-testimonials' ) }
+                        label={ __( 'No restriction' ) }
                         checked={ width100 }
                         onChange={ ( isChecked ) => {
                             setAttributes( {
                                 width100: isChecked,
-                                containerMaxWidth: isChecked ? '100%' : 1170,
+                                containerMaxWidth: isChecked ? '100%' : '1170',
                             } );
                         } }
-                        help={ __( 'No restriction layout width for content children.', 'kenzap-testimonials' ) }
+                        help={ __( 'No restriction layout width for content children.' ) }
                     />
                     }
 
                     { withPadding &&
                         <Fragment>
                             <RangeControl
-                                label={ __( 'Top and bottom paddings', 'kenzap-testimonials' ) }
+                                label={ __( 'Top and bottom paddings' ) }
                                 value={ containerPadding }
                                 onChange={ ( value ) => setAttributes( { containerPadding: value } ) }
                                 min={ 0 }
                                 max={ 200 }
-                                help={ __( 'Useful when you want to extend background image vertical size or create more space.', 'kenzap-testimonials' ) }
+                            />
+
+                            <RangeControl
+                                label={ __( 'Left and right paddings' ) }
+                                value={ containerSidePadding }
+                                onChange={ ( value ) => setAttributes( { containerSidePadding: value } ) }
+                                min={ 0 }
+                                max={ 50 }
                             />
 
                             <CheckboxControl
-                                label={ __( 'Responsive paddings', 'kenzap-testimonials' ) }
+                                label={ __( 'Responsive paddings' ) }
                                 checked={ autoPadding.length > 0 }
                                 onChange={ ( isChecked ) => {
                                     setAttributes( {
                                         autoPadding: isChecked ? 'autoPadding' : '',
                                     } );
                                 } }
-                                help={ __( 'Provides auto calculations for top and bottom paddings', 'kenzap-testimonials' ) }
+                                help={ __( 'Provides auto calculations for top and bottom paddings' ) }
                             />
                         </Fragment>
                     }
+
+                    <SelectControl
+                        label={ __( 'Nested block', 'kenzap-cta' ) }
+                        value={ nestedBlocks }
+                        options={ [
+                                { label: __( 'hidden', 'kenzap-cta' ), value: '' },
+                                { label: __( 'top', 'kenzap-cta' ), value: 'top' },
+                                { label: __( 'bottom', 'kenzap-cta' ), value: 'bottom' },
+                            ] }
+                        onChange={ ( value ) => {
+                                setAttributes( { nestedBlocks: value } );
+                            } }
+                            help={ __( 'Allow other blocks to be nested inside this container. Nested blocks inherit parent block styling settings. Usefull to add custom headings, spacings or paragraphs.', 'kenzap-cta' ) }
+                        />
                 </PanelBody>
             </Fragment>
         );
@@ -290,7 +343,11 @@ export const ContainerEdit = ( props ) => {
     }
 
     if ( props.withPadding && ! props.attributes.autoPadding ) {
-        styles.padding = `${ props.attributes.containerPadding }px 0`;
+        styles.padding = `${ props.attributes.containerPadding }px ${ props.attributes.containerSidePadding }px`;
+    }
+
+    if ( props.attributes.parallax ) {
+        styles.backgroundAttachment = 'fixed';
     }
 
     switch ( props.attributes.backgroundStyle ) {
@@ -312,15 +369,16 @@ export const ContainerEdit = ( props ) => {
             break;
         }
 
-        case 'repeated': {
-            styles.backgroundRepeat = 'repeated';
+        case 'repeat': {
+            styles.backgroundRepeat = 'repeat';
             styles.backgroundSize = 'auto';
         }
     }
 
     return (
         <div
-            className={ `${ props.className } ${ props.attributes.alignment } ${ props.attributes.autoPadding }` }
+            id={ props.attributes.uniqueID ? props.attributes.uniqueID: "" }
+            className={ `${ props.className } kenzap-sm ${ props.attributes.alignment } ${ props.attributes.autoPadding }` }
             style={ { ...styles, ...props.style } }
         >
             { props.children }
@@ -351,7 +409,11 @@ export const ContainerSave = ( props ) => {
     }
 
     if ( props.withPadding && ! props.attributes.autoPadding ) {
-        styles.padding = `${ props.attributes.containerPadding }px 0`;
+        styles.padding = `${ props.attributes.containerPadding }px ${ props.attributes.containerSidePadding }px`;
+    }
+
+    if ( props.attributes.parallax ) {
+        styles.backgroundAttachment = 'fixed';
     }
 
     switch ( props.attributes.backgroundStyle ) {
@@ -373,15 +435,31 @@ export const ContainerSave = ( props ) => {
             break;
         }
 
-        case 'repeated': {
-            styles.backgroundRepeat = 'repeated';
+        case 'repeat': {
+            styles.backgroundRepeat = 'repeat';
             styles.backgroundSize = 'auto';
         }
     }
 
+    let additionalClassForKenzapContainer = 'kenzap-lg';
+    if (props.attributes.containerMaxWidth < 992 ) {
+        additionalClassForKenzapContainer = 'kenzap-md';
+    }
+    if ( props.attributes.containerMaxWidth < 768 ) {
+        additionalClassForKenzapContainer = 'kenzap-sm';
+    }
+    if ( props.attributes.containerMaxWidth < 480 ) {
+        additionalClassForKenzapContainer = 'kenzap-xs';
+    }
+
+    if ( props.attributes.width100 ) {
+        additionalClassForKenzapContainer = 'kenzap-lg';
+    }
+
     return (
         <div
-            className={ `${ props.className } ${ props.attributes.alignment } ${ props.attributes.autoPadding }` }
+            id={ props.attributes.uniqueID ? props.attributes.uniqueID: "" }
+            className={ `${ props.className } ${additionalClassForKenzapContainer} ${ props.attributes.alignment } ${ props.attributes.autoPadding }` }
             style={ { ...styles, ...props.style } }
         >
             { props.children }

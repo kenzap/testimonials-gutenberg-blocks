@@ -1,11 +1,10 @@
-const { __ } = wp.i18n; // Import __() from wp.i18n
+const { __ } = wp.i18n;
 const { Component } = wp.element;
-const { RichText, InspectorControls, MediaUpload, PanelColorSettings } = wp.editor;
+const { RichText, InspectorControls, MediaUpload, PanelColorSettings, InnerBlocks } = wp.editor;
 const { RangeControl, PanelBody } = wp.components;
-
-import { defaultItem, getStyles } from './block';
-
+import { defaultItem, getStyles, typographyArr } from './block';
 import { InspectorContainer, ContainerEdit } from '../commonComponents/container/container';
+import { TypographyContainer, getTypography } from '../commonComponents/typography/typography';
 import { Plus } from '../commonComponents/icons/plus';
 
 /**
@@ -99,33 +98,20 @@ export default class Edit extends Component {
                         initialOpen={ false }
                     >
                         <RangeControl
-                            label={ __( 'Testimonial size', 'kenzap-testimonials' ) }
-                            value={ attributes.testimonialSize }
-                            onChange={ ( testimonialSize ) => setAttributes( { testimonialSize } ) }
-                            min={ 10 }
-                            max={ 130 }
-                        />
-                        <RangeControl
-                            label={ __( 'Author size', 'kenzap-testimonials' ) }
-                            value={ attributes.authorSize }
-                            onChange={ ( authorSize ) => setAttributes( { authorSize } ) }
-                            min={ 10 }
-                            max={ 130 }
-                        />
-                        <PanelColorSettings
-                            title={ __( 'Colors', 'kenzap-testimonials' ) }
-                            initialOpen={ false }
-                            colorSettings={ [
-                                {
-                                    value: attributes.textColor,
-                                    onChange: ( value ) => {
-                                        return setAttributes( { textColor: value } );
-                                    },
-                                    label: __( 'Text color', 'kenzap-testimonials' ),
-                                },
-                            ] }
+                            label={ __( 'Avatar size', 'kenzap-testimonials' ) }
+                            value={ attributes.imageSize }
+                            onChange={ ( imageSize ) => setAttributes( { imageSize } ) }
+                            min={ 50 }
+                            max={ 200 }
                         />
                     </PanelBody>
+
+                    <TypographyContainer
+                        setAttributes={ setAttributes }
+                        typographyArr={ typographyArr }
+                        { ...attributes }
+                    />
+
                     <InspectorContainer
                         setAttributes={ setAttributes }
                         { ...attributes }
@@ -152,7 +138,7 @@ export default class Edit extends Component {
                                         <button className="remove" onClick={ () => this.removeItem( index ) }>
                                             <span className="dashicons dashicons-no" />
                                         </button>
-                                        <div className="testimonial-image">
+                                        <div className="testimonial-image" style={ { width: `${ attributes.imageSize }px` } } >
                                             { item.imageUrl ? (
                                                 <MediaUpload
                                                     onSelect={ ( media ) => {
@@ -201,22 +187,14 @@ export default class Edit extends Component {
                                                 placeholder={ __( 'Testimonial', 'kenzap-testimonials' ) }
                                                 value={ item.testimonial }
                                                 onChange={ ( value ) => this.onChangePropertyItem( 'testimonial', value, index, true ) }
-                                                style={ {
-                                                    color: attributes.textColor,
-                                                    fontSize: `${ attributes.testimonialSize }px`,
-                                                    lineHeight: `${ attributes.testimonialSize * 1.2 }px`,
-                                                } }
+                                                style={ getTypography( attributes, 0 ) }
                                             />
                                             <RichText
                                                 tagName="span"
                                                 placeholder={ __( 'Author', 'kenzap-testimonials' ) }
                                                 value={ item.author }
                                                 onChange={ ( value ) => this.onChangePropertyItem( 'author', value, index, true ) }
-                                                style={ {
-                                                    color: attributes.textColor,
-                                                    fontSize: `${ attributes.authorSize }px`,
-                                                    lineHeight: `${ attributes.authorSize * 1.4 }px`,
-                                                } }
+                                                style={ getTypography( attributes, 1 ) }
                                             />
                                         </div>
                                     </div>

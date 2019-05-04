@@ -1,0 +1,368 @@
+.kenzap .kenzap-testimonials-4.autoPadding {
+  padding: calc(30px + (var(--paddings) - 30) * ((100vw - 300px) / (1600 - 300))) 0;
+}
+
+.kenzap .kenzap-testimonials-4 *{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.kenzap .kenzap-timeline-4 :before,
+.kenzap .kenzap-timeline-4 :after{
+  -webkit-box-sizing: unset;
+  -moz-box-sizing: unset;
+  box-sizing: unset;
+}
+
+.kenzap .kenzap-testimonials-4 img,
+.kenzap .kenzap-testimonials-4 ul,
+.kenzap .kenzap-testimonials-4 li,
+.kenzap .kenzap-testimonials-4 p,
+.kenzap .kenzap-testimonials-4 a{
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  border: none;
+  text-decoration: none;
+  list-style:none
+}
+
+.kenzap .kenzap-testimonials-4 .kenzap-container{
+  max-width:1170px;
+  padding:0 15px;
+  margin:0 auto;
+  display:flex;
+  display:-webkit-flex;
+  align-items:center;
+  -webkit-align-items:center;
+}
+
+.kenzap .kenzap-testimonials-4{
+  position:relative;
+}
+
+.kenzap .kenzap-testimonials-4 .owl-dots{
+  width:40%;
+  position:relative;
+  height:500px;
+  background:url(testimonials-list-4/testimonial-bg.png) no-repeat center top
+}
+
+.kenzap .kenzap-testimonials-4 .owl-dots .owl-dot{
+  position:absolute;
+  opacity:0;
+  bottom:0;
+  left:0;
+  right:0;
+  margin:auto;
+  text-align:center
+}
+
+.kenzap .kenzap-testimonials-4 .owl-dots .owl-dot img{
+  transition:all .3s;
+  transform:scale(.8);
+  max-width:100%;
+  display:inline-block
+}
+
+.kenzap .kenzap-testimonials-4 .owl-dots .owl-dot.active{
+  display:block;
+  z-index:9999;
+  opacity:1
+}
+
+.kenzap .kenzap-testimonials-4 .owl-dots .owl-dot.active img{
+  transform:scale(1);
+}
+
+
+.kenzap .kenzap-testimonials-4 .owl-carousel{
+  width:60%;
+  padding:0 0 0 30px
+}
+
+.kenzap .kenzap-testimonials-4 .testimonial-box {
+  min-width: 95%;
+  margin: 0 20px;
+  background:url(testimonials-list-4/testimonial-bg.png) no-repeat center top;
+  position:relative;
+}
+
+.kenzap .kenzap-testimonials-4 .testimonial-box .kp-content .text{
+  // font-size: calc(26px + (39 - 26) * ((100vw - 300px) / (1600 - 300)));
+  // line-height: calc(32px + (45 - 32) * ((100vw - 300px) / (1600 - 300)));
+  // font-weight:400;
+  // font-style:italic;
+  color:#000;
+  margin:0 0 30px;
+}
+
+
+.kenzap .kenzap-testimonials-4 .testimonial-box .kp-content span{
+  // font-weight:400;
+  // line-height:1.3;
+  // font-size:15px;
+  color:#9c9c9c;
+  //font-style:italic;
+  display:block;
+  margin:0 0 30px
+}
+
+.kenzap .kenzap-testimonials-4 .owl-stage {
+  display: flex;
+  overflow-x: scroll;
+}
+.kenzap .kenzap-testimonials-4 .kp-image {
+  text-align: center;
+
+  & img {
+    max-height: 100%;
+
+  }
+}
+
+.kenzap .kenzap-testimonials-4 .owl-carousel .owl-nav{
+  display:flex;
+  display:-webkit-flex;
+  align-items:center;
+  -webkit-align-items:center;
+  margin-top: 20px;
+}
+
+.kenzap .kenzap-testimonials-4 .owl-carousel .owl-nav button{
+  margin:0 30px 0 0;
+}
+
+.kenzap .kenzap-testimonials-4 .owl-carousel .owl-nav button.owl-prev span{
+  display:inline-block;
+  text-indent:-99999px;
+  width:20px;
+  height:31px;
+  background:url(testimonials-list-4/prev-icon.svg) no-repeat center center;
+  background-size:20px 31px;
+  transition:all .3s;
+  position:relative;
+  left:0;
+}
+
+.kenzap .kenzap-testimonials-4 .owl-carousel .owl-nav button.owl-prev:hover span{
+  left: -5px
+}
+
+.kenzap .kenzap-testimonials-4 .owl-carousel .owl-nav button.owl-next span{
+  display:inline-block;
+  text-indent:-99999px;
+  width:20px;
+  height:31px;
+  background:url(testimonials-list-4/next-icon.svg) no-repeat center center;
+  background-size:20px 31px;
+  transition:all .3s;
+  position:relative;
+  right:0;
+}
+
+.kenzap .kenzap-testimonials-4 .owl-carousel .owl-nav button.owl-next:hover span{
+  right: -5px
+}
+
+
+.kenzap .kenzap-testimonials-4.kenzap-sm .kenzap-container,
+.kenzap .kenzap-testimonials-4.kenzap-xs .kenzap-container,
+.kenzap .kenzap-testimonials-4.kenzap-md .kenzap-container{
+  flex-direction:column;
+  -webkit-flex-direction:column;
+}
+
+.kenzap .kenzap-testimonials-4.kenzap-sm .owl-carousel,
+.kenzap .kenzap-testimonials-4.kenzap-xs .owl-carousel,
+.kenzap .kenzap-testimonials-4.kenzap-md .owl-carousel{
+  width:100%;
+}
+
+.kenzap .kenzap-testimonials-4.kenzap-md .owl-dots{
+  height:450px;
+  width:50%;
+  margin: 0 auto 30px
+}
+
+.kenzap .kenzap-testimonials-4.kenzap-sm .owl-carousel,
+.kenzap .kenzap-testimonials-4.kenzap-xs .owl-carousel,
+.kenzap .kenzap-testimonials-4.kenzap-md .owl-carousel{
+  padding:0
+}
+
+.kenzap .kenzap-testimonials-4.kenzap-sm .testimonial-box .kp-content .text,
+.kenzap .kenzap-testimonials-4.kenzap-xs .testimonial-box .kp-content .text,
+.kenzap .kenzap-testimonials-4.kenzap-md .testimonial-box .kp-content .text,
+.kenzap .kenzap-testimonials-4.kenzap-sm .testimonial-box .kp-content span,
+.kenzap .kenzap-testimonials-4.kenzap-xs .testimonial-box .kp-content span,
+.kenzap .kenzap-testimonials-4.kenzap-md .testimonial-box .kp-content span{
+  text-align:center
+}
+
+.kenzap .kenzap-testimonials-4.kenzap-md .owl-carousel .owl-nav,
+.kenzap .kenzap-testimonials-4.kenzap-sm .owl-carousel .owl-nav,
+.kenzap .kenzap-testimonials-4.kenzap-xs .owl-carousel .owl-nav{
+  justify-content:center;
+  -webkit-justify-content:center;
+}
+
+
+.kenzap .kenzap-testimonials-4.kenzap-sm .owl-dots{
+  width:80%;
+  height:450px;
+  margin:0 0 30px
+}
+
+.kenzap .kenzap-testimonials-4.kenzap-xs .owl-dots{
+  width:100%;
+  height:450px;
+  margin:0 0 30px;
+}
+
+@media screen and (max-width: 61.938em) {
+  /* width: 991px; */
+
+  .kenzap .kenzap-testimonials-4 .kenzap-container{
+    flex-direction:column;
+    -webkit-flex-direction:column;
+  }
+
+  .kenzap .kenzap-testimonials-4 .owl-carousel{
+    width:100%;
+  }
+
+  .kenzap .kenzap-testimonials-4 .owl-dots{
+    height:450px;
+    width:50%;
+    margin: 0 auto 30px
+  }
+
+  .kenzap .kenzap-testimonials-4 .owl-carousel{
+    padding:0
+  }
+
+  .kenzap .kenzap-testimonials-4 .testimonial-box .kp-content .text,
+  .kenzap .kenzap-testimonials-4 .testimonial-box .kp-content span{
+    text-align:center
+  }
+
+  .kenzap .kenzap-testimonials-4 .owl-carousel .owl-nav{
+    justify-content:center;
+    -webkit-justify-content:center;
+  }
+}
+
+
+@media screen and (max-width: 48em) {
+  /* width 768px */
+
+  .kenzap .kenzap-testimonials-4.kenzap-md .owl-dots,
+  .kenzap .kenzap-testimonials-4 .owl-dots{
+    width:80%;
+    height:450px
+  }
+
+
+}
+
+
+@media screen and (max-width: 30em) {
+  /* width 480px */
+
+  .kenzap .kenzap-testimonials-4.kenzap-xs .owl-dots,
+  .kenzap .kenzap-testimonials-4.kenzap-md .owl-dots,
+  .kenzap .kenzap-testimonials-4.kenzap-sm .owl-dots,
+  .kenzap .kenzap-testimonials-4 .owl-dots{
+    width:100%;
+    height:400px
+  }
+
+
+}
+
+.kenzap .kenzap-testimonials-4 .remove {
+  opacity: 1;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  padding: 0;
+  border: 0;
+  background: $white;
+  border-radius: 50%;
+  color: rgba(10,24,41,0.7);
+  z-index: 99;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  font-family: dashicons;
+  font-weight: 400;
+  font-style: normal;
+  vertical-align: top;
+
+  &:hover {
+    color: #191e23;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.kenzap .kenzap-testimonials-4 .testimonial-box:hover .remove{
+  opacity: 1;
+}
+
+.kenzap .kenzap-testimonials-4 .addWhite {
+  position: absolute;
+  display: none;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%);
+  border-radius: 5px;
+  padding: 5px;
+  border: 0;
+  background: white;
+  box-shadow: inset 0 0 50px white;
+  color: rgba(10,24,41,0.7);
+  cursor: pointer;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  &:hover {
+    color: #191e23;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.kenzap .kenzap-testimonials-4 {
+  position: relative;
+  transition: all .2s;
+}
+
+.kenzap .kenzap-testimonials-4 .editPadding {
+  transition: all .2s;
+}
+
+.kenzap .kenzap-testimonials-4.selected {
+
+  & .addWhite {
+    display: flex;
+  }
+
+   .editPadding {
+     padding: 0 0 100px;
+   }
+}
+

@@ -1,17 +1,11 @@
-/**
- * BLOCK: testimonials-list-3
- *
- */
-
-//  Import CSS.
 import './style.scss';
 import './editor.scss';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const { RichText } = wp.editor;
-
+const { RichText, InnerBlocks } = wp.editor;
 import { blockProps, ContainerSave } from '../commonComponents/container/container';
+import { getTypography } from '../commonComponents/typography/typography';
 import Edit from './edit';
 
 /**
@@ -47,6 +41,52 @@ export const defaultSubBlocks = JSON.stringify( [
     },
 ] );
 
+export const attrs =  {
+        ...blockProps,
+
+        align: {
+            type: 'string',
+            default: 'full',
+        },
+
+        // override from container
+        containerPadding: {
+            type: 'number',
+            default: 58,
+        },
+
+        // override from container
+        backgroundImage: {
+            type: 'string',
+            default: window.kenzap_testimonials_gutenberg_path + 'testimonials-list-3/testimonials-bg.jpg',
+        },
+
+        imageSize: {
+            type: 'number',
+            default: 126,
+        },
+
+        items: {
+            type: 'array',
+            default: [],
+        },
+
+        typography: {
+            type: 'array',
+            default: [],
+        },
+
+        isFirstLoad: {
+            type: 'boolean',
+            default: true,
+        },
+
+        blockUniqId: {
+            type: 'number',
+            default: 0,
+        },
+    };
+
 /**
  * Generate inline styles for custom settings of the block
  * @param {Object} attributes - of the block
@@ -59,9 +99,8 @@ export const getStyles = attributes => {
     };
 
     const vars = {
-        '--p': `${ attributes.testimonialSize }px`,
-        '--plh': `${ attributes.testimonialSize * 1.2 }px`,
         '--paddings': `${ attributes.containerPadding }`,
+        '--paddings2': `${ attributes.containerSidePadding }px`,
         '--paddingsMin': `${ attributes.containerPadding / 4 }`,
         '--paddingsMinPx': `${ attributes.containerPadding / 4 }px`,
     };
@@ -71,6 +110,27 @@ export const getStyles = attributes => {
         vars,
     };
 };
+
+/**
+ * Define typography defaults
+ */
+export const typographyArr = JSON.stringify([
+    {
+        'title': __( '- Testimonial', 'kenzap-timeline' ),
+        'font-size': 30,
+        'font-weight': 6,
+        'line-height': 36,
+        'margin-bottom': 0,
+    },
+    {
+        'title': __( '- Author', 'kenzap-timeline' ),
+        'font-size': 16,
+        'font-weight': 4,
+        'line-height': 22,
+        'margin-top': 20,
+        'margin-bottom': 20,
+    },
+]);
 
 /**
  * Register: a Gutenberg Block.
@@ -94,50 +154,10 @@ registerBlockType( 'kenzap/testimonials-list-3', {
     ],
     anchor: true,
     html: true,
-    attributes: {
-        ...blockProps,
-        // override from container
-        containerPadding: {
-            type: 'number',
-            default: 58,
-        },
-
-        // override from container
-        backgroundImage: {
-            type: 'string',
-            default: window.kenzap_testimonials_gutenberg_path + 'testimonials-list-3/testimonials-bg.jpg',
-        },
-
-        testimonialSize: {
-            type: 'number',
-            default: 30,
-        },
-
-        authorSize: {
-            type: 'number',
-            default: 16,
-        },
-
-        textColor: {
-            type: 'string',
-            default: '#fff',
-        },
-
-        items: {
-            type: 'array',
-            default: [],
-        },
-
-        isFirstLoad: {
-            type: 'boolean',
-            default: true,
-        },
-
-        blockUniqId: {
-            type: 'number',
-            default: 0,
-        },
+    supports: {
+        align: [ 'full', 'wide' ],
     },
+    attributes: attrs,
 
     edit: ( props ) => {
         if ( props.attributes.items.length === 0 && props.attributes.isFirstLoad ) {
@@ -145,7 +165,7 @@ registerBlockType( 'kenzap/testimonials-list-3', {
                 items: [ ...JSON.parse( defaultSubBlocks ) ],
                 isFirstLoad: false,
             } );
-            // TODO It is very bad solution to avoid low speed working of setAttributes function
+
             props.attributes.items = JSON.parse( defaultSubBlocks );
             if ( ! props.attributes.blockUniqId ) {
                 props.setAttributes( {
@@ -153,6 +173,12 @@ registerBlockType( 'kenzap/testimonials-list-3', {
                 } );
             }
         }
+
+        Object.keys( props.attributes ).forEach( attr => {
+            if ( typeof props.attributes[ attr ] === 'undefined' ) {
+                props.attributes[ attr ] = attrs[ attr ].default;
+            }
+        } );
 
         return ( <Edit { ...props } /> );
     },
@@ -171,6 +197,12 @@ registerBlockType( 'kenzap/testimonials-list-3', {
             attributes,
         } = props;
 
+        Object.keys( attributes ).forEach( attr => {
+            if ( typeof attributes[ attr ] === 'undefined' ) {
+                attributes[ attr ] = attrs[ attr ].default;
+            }
+        } );
+
         const { vars, kenzapContanerStyles } = getStyles( props.attributes );
 
         return (
@@ -182,36 +214,32 @@ registerBlockType( 'kenzap/testimonials-list-3', {
                     withPadding
                 >
                     <div className="kenzap-container" style={ kenzapContanerStyles }>
+                        { attributes.nestedBlocks == 'top' && <InnerBlocks.Content /> }
                         <div className="owl-carousel">
                             { attributes.items && attributes.items.map( item => (
                                 <div
                                     key={ item.key }
                                     className="testimonial-box"
                                 >
-                                    <div className="testimonial-image">
+                                    <div className="testimonial-image" style={ { width: `${ attributes.imageSize }px` } }>
                                         <img src={ item.imageUrl } alt={ item.author.replace( /<(?:.|\n)*?>/gm, '' ) } />
                                     </div>
                                     <div className="testimonial-content">
                                         <RichText.Content
                                             tagName="p"
                                             value={ item.testimonial }
-                                            style={ {
-                                                color: attributes.textColor,
-                                            } }
+                                            style={ getTypography( attributes, 0 ) }
                                         />
                                         <RichText.Content
                                             tagName="span"
                                             value={ item.author }
-                                            style={ {
-                                                color: attributes.textColor,
-                                                fontSize: `${ attributes.authorSize }px`,
-                                                lineHeight: `${ attributes.authorSize * 1.2 }px`,
-                                            } }
+                                            style={ getTypography( attributes, 1 ) }
                                         />
                                     </div>
                                 </div>
                             ) ) }
                         </div>
+                        { attributes.nestedBlocks == 'bottom' && <InnerBlocks.Content /> }
                     </div>
                 </ContainerSave>
             </div>

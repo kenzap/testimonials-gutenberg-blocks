@@ -99,7 +99,7 @@ function kenzap_testimonials_add_specific_features( $post_object ) {
         $pathToPlugin = plugins_url( 'dist/', dirname( __FILE__ ) );
         $blocks = parse_blocks( $post_object ->post_content );
         foreach ($blocks as $block) {
-            if ( $block['blockName'] == 'kenzap/testimonials-list-2' || $block['blockName'] == 'kenzap/testimonials-list-3' ) {
+            if ( $block['blockName'] == 'kenzap/testimonials-list-2' || $block['blockName'] == 'kenzap/testimonials-list-3' || $block['blockName'] == 'kenzap/testimonials-list-4' ) {
                 wp_register_script( 'owl-carousel', $pathToPlugin . 'owl-carousel/owl-carousel.js');
                 wp_enqueue_script( 'owl-carousel' );
                 wp_register_style('owl-carousel', $pathToPlugin.'owl-carousel/owl-carousel.css');
@@ -112,6 +112,10 @@ function kenzap_testimonials_add_specific_features( $post_object ) {
 
             if ($block['blockName'] == 'kenzap/testimonials-list-3') {
                 wp_enqueue_script( 'kenzap/testimonials-list-3', plugins_url( 'testimonials-list-3/script.js', __FILE__ ), array('owl-carousel') );
+            }
+
+            if ($block['blockName'] == 'kenzap/testimonials-list-4') {
+                wp_enqueue_script( 'kenzap/testimonials-list-4', plugins_url( 'testimonials-list-4/script.js', __FILE__ ), array('owl-carousel') );
             }
         }
     }

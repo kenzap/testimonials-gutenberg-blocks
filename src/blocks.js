@@ -11,3 +11,5 @@
 
 import './testimonials-list-2/block.js';
 import './testimonials-list-3/block.js';
+import './testimonials-list-4/block.js';
+
