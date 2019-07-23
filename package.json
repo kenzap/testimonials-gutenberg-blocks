@@ -8,6 +8,8 @@
     "eject": "cgb-scripts eject"
   },
   "dependencies": {
-    "cgb-scripts": "^1.17.0"
+    "cgb-scripts": "^1.18.1",
+    "lodash": "^4.17.15",
+    "mem": "^5.1.1"
   }
 }

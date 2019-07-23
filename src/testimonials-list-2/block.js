@@ -54,16 +54,6 @@ export const attrs = {
             default: window.kenzap_testimonials_gutenberg_path + 'testimonials-list-2/testimonials-bg.jpg',
         },
 
-        testimonialSize: {
-            type: 'number',
-            default: 22,
-        },
-
-        authorSize: {
-            type: 'number',
-            default: 14,
-        },
-
         textColor: {
             type: 'string',
             default: '#fff',
@@ -112,8 +102,6 @@ export const getStyles = attributes => {
     const vars = {
         '--paddings': `${ attributes.containerPadding }`,
         '--paddings2': `${ attributes.containerSidePadding }px`,
-        '--paddingsMin': `${ attributes.containerPadding / 4 }`,
-        '--paddingsMinPx': `${ attributes.containerPadding / 4 }px`,
     };
 
     return {

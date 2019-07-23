@@ -91,20 +91,6 @@ export default class Edit extends Component {
                         title={ __( 'General', 'kenzap-testimonials' ) }
                         initialOpen={ false }
                     >
-                        {/* <RangeControl
-                            label={ __( 'Testimonial size', 'kenzap-testimonials' ) }
-                            value={ attributes.testimonialSize }
-                            onChange={ ( testimonialSize ) => setAttributes( { testimonialSize } ) }
-                            min={ 10 }
-                            max={ 130 }
-                        />
-                        <RangeControl
-                            label={ __( 'Author size', 'kenzap-testimonials' ) }
-                            value={ attributes.authorSize }
-                            onChange={ ( authorSize ) => setAttributes( { authorSize } ) }
-                            min={ 10 }
-                            max={ 130 }
-                        /> */}
                         <p style={ { marginBottom: '5px' } }>{ __( 'Quote icon', 'kenzap-testimonials' ) }</p>
                         <MediaUpload
                             onSelect={ ( media ) => {

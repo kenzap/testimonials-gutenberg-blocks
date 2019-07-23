@@ -1,4 +1,4 @@
-const { __ } = wp.i18n; // Import __() from wp.i18n
+const { __ } = wp.i18n;
 const { Component } = wp.element;
 const { RichText, InspectorControls, MediaUpload, PanelColorSettings, InnerBlocks } = wp.editor;
 const { RangeControl, PanelBody } = wp.components;
@@ -97,20 +97,6 @@ export default class Edit extends Component {
                         title={ __( 'General', 'kenzap-testimonials' ) }
                         initialOpen={ false }
                     >
-                        {/* <RangeControl
-                            label={ __( 'Testimonial size', 'kenzap-testimonials' ) }
-                            value={ attributes.testimonialSize }
-                            onChange={ ( testimonialSize ) => setAttributes( { testimonialSize } ) }
-                            min={ 10 }
-                            max={ 130 }
-                        /> */}
-                        {/* <RangeControl
-                            label={ __( 'Author size', 'kenzap-testimonials' ) }
-                            value={ attributes.authorSize }
-                            onChange={ ( authorSize ) => setAttributes( { authorSize } ) }
-                            min={ 10 }
-                            max={ 130 }
-                        /> */}
                         <RangeControl
                             label={ __( 'Image size', 'kenzap-testimonials' ) }
                             value={ attributes.imgHeight }
@@ -118,26 +104,6 @@ export default class Edit extends Component {
                             min={ 10 }
                             max={ 600 }
                         />
-                        {/* <PanelColorSettings
-                            title={ __( 'Colors', 'kenzap-testimonials' ) }
-                            initialOpen={ false }
-                            colorSettings={ [
-                                {
-                                    value: attributes.testimonialColor,
-                                    onChange: ( testimonialColor ) => {
-                                        return setAttributes( { testimonialColor } );
-                                    },
-                                    label: __( 'Testimonial', 'kenzap-testimonials' ),
-                                },
-                                {
-                                    value: attributes.authorColor,
-                                    onChange: ( authorColor ) => {
-                                        return setAttributes( { authorColor } );
-                                    },
-                                    label: __( 'Author', 'kenzap-testimonials' ),
-                                },
-                            ] }
-                        /> */}
                     </PanelBody>
 
                     <TypographyContainer
@@ -157,7 +123,7 @@ export default class Edit extends Component {
                 </InspectorControls>
                 <div className={ className ? className : '' } style={ vars }>
                     <ContainerEdit
-                        className={ `kenzap-testimonials-4 kenzap-xs admin block-${ attributes.blockUniqId } ${ isSelected ? 'selected' : '' } ` }
+                        className={ `kenzap-testimonials-4 kenzap-sm admin block-${ attributes.blockUniqId } ${ isSelected ? 'selected' : '' } ` }
                         attributes={ attributes }
                         withBackground
                         withPadding
@@ -182,7 +148,7 @@ export default class Edit extends Component {
                                                             this.onChangePropertyItem( 'imageUrl', media.url, index, true );
                                                         } }
                                                         value={ item.imageId }
-                                                        allowedTypes={ [ 'image', 'image/svg+xml' ] }
+                                                        allowedTypes={ [ 'image', 'image/svg' ] }
                                                         render={ ( props ) => (
                                                             <img
                                                                 src={ item.imageUrl }

@@ -55,16 +55,6 @@ export const attrs = {
             default: '#fff',
         },
 
-        testimonialSize: {
-            type: 'number',
-            default: 30,
-        },
-
-        authorSize: {
-            type: 'number',
-            default: 16,
-        },
-
         imgHeight: {
             type: 'number',
             default: 509,
@@ -115,8 +105,6 @@ export const getStyles = attributes => {
     const vars = {
         '--paddings': `${ attributes.containerPadding }`,
         '--paddings2': `${ attributes.containerSidePadding }px`,
-        '--paddingsMin': `${ attributes.containerPadding / 4 }`,
-        '--paddingsMinPx': `${ attributes.containerPadding / 4 }px`,
     };
 
     return {
@@ -191,7 +179,7 @@ registerBlockType( 'kenzap/testimonials-list-4', {
                 items: [ ...JSON.parse( defaultSubBlocks ) ],
                 isFirstLoad: false,
             } );
-            // TODO It is very bad solution to avoid low speed working of setAttributes function
+
             props.attributes.items = JSON.parse( defaultSubBlocks );
             if ( ! props.attributes.blockUniqId ) {
                 props.setAttributes( {

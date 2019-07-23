@@ -9,7 +9,7 @@
 
 .kenzap .kenzap-testimonials-3 .kenzap-container{
   max-width:1170px;
-  padding:0 15px;
+  padding:0 var(--paddings2,0);
   margin:0 auto;
 }
 
@@ -20,7 +20,7 @@
 }
 
 .kenzap .kenzap-testimonials-3.autoPadding {
-  padding: calc(var(--paddingsMinPx) + (var(--paddings) - var(--paddingsMin)) * ((100vw - 300px) / (1600 - 300))) var(--paddings2,0);
+  padding: calc(30px + (var(--paddings) - 30) * ((100vw - 300px) / (1600 - 300))) 0;
 }
 
 .kenzap .kenzap-testimonials-3 .testimonial-box{
@@ -40,7 +40,6 @@
 }
 
 .kenzap-testimonials-3 .testimonial-box .testimonial-content p{
-  font-family: 'Poppins', sans-serif;
   font-weight:700;
   line-height: 1.1;
   font-size: calc(var(--p) + (45 - 26) * ((100vw - 500px) / (var(--maxWidth) + 500)));
@@ -49,7 +48,6 @@
 }
 
 .kenzap-testimonials-3 .testimonial-box .testimonial-content span{
-  font-family: 'Poppins', sans-serif;
   font-weight:300;
   line-height:19px;
   color:#fff;

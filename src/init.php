@@ -85,7 +85,7 @@ function kenzap_testimonials_list_editor_assets() {
 	}
 
 	$pathToPlugin = plugins_url( 'dist/', dirname( __FILE__ ) );
-    wp_add_inline_script( 'wp-blocks', 'var kenzap_testimonials_gutenberg_path = "' .$pathToPlugin.'"', 'before');
+    wp_add_inline_script( 'wp-blocks', 'var kenzap_testimonials_gutenberg_path = "' .wp_parse_url($pathToPlugin)['path'].'"', 'before');
 } // End function kenzap_feature_list_cgb_editor_assets().
 
 // Hook: Editor assets.

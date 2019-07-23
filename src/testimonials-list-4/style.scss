@@ -1,5 +1,5 @@
 .kenzap .kenzap-testimonials-4.autoPadding {
-  padding: calc(30px + (var(--paddings) - 30) * ((100vw - 300px) / (1600 - 300))) var(--paddings2,0);
+  padding: calc(30px + (var(--paddings) - 30) * ((100vw - 300px) / (1600 - 300))) 0;
 }
 
 .kenzap .kenzap-testimonials-4 button {
@@ -35,7 +35,7 @@
 
 .kenzap .kenzap-testimonials-4 .kenzap-container{
   max-width:1170px;
-  padding:0 0px;
+  padding:0 var(--paddings2,0);
   margin:0 auto;
   display:flex;
   display:-webkit-flex;

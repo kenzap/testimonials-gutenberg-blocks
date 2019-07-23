@@ -101,8 +101,6 @@ export const getStyles = attributes => {
     const vars = {
         '--paddings': `${ attributes.containerPadding }`,
         '--paddings2': `${ attributes.containerSidePadding }px`,
-        '--paddingsMin': `${ attributes.containerPadding / 4 }`,
-        '--paddingsMinPx': `${ attributes.containerPadding / 4 }px`,
     };
 
     return {

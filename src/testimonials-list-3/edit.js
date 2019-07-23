@@ -146,7 +146,7 @@ export default class Edit extends Component {
                                                         this.onChangePropertyItem( 'imageUrl', media.url, index, true );
                                                     } }
                                                     value={ item.imageId }
-                                                    allowedTypes={ [ 'image', 'image/svg+xml' ] }
+                                                    allowedTypes={ [ 'image', 'image/svg' ] }
                                                     render={ ( props ) => (
                                                         <img
                                                             src={ item.imageUrl }
@@ -171,7 +171,7 @@ export default class Edit extends Component {
                                                             this.onChangePropertyItem( 'imageUrl', media.url, index, true );
                                                         } }
                                                         value={ item.imageId }
-                                                        allowedTypes={ [ 'image', 'image/svg+xml' ] }
+                                                        allowedTypes={ [ 'image', 'image/svg' ] }
                                                         render={ ( props ) => (
                                                             <button onClick={ props.open }>
                                                                 { __( 'Upload/Choose icon', 'kenzap-testimonials' ) }
