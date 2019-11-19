@@ -17,16 +17,16 @@
   padding: calc(30px + (var(--paddings) - 30) * ((100vw - 300px) / (1600 - 300))) 0;
 }
 
-.kenzap .kenzap-testimonials-2:before{
-  content: "";
-  display:block;
-  position:absolute;
-  top:0;
-  bottom:0;
-  left:0;
-  right:0;
-  //background: rgba(21, 21, 21, 0.5);
-}
+// .kenzap .kenzap-testimonials-2:before{
+//   content: "";
+//   display:block;
+//   position:absolute;
+//   top:0;
+//   bottom:0;
+//   left:0;
+//   right:0;
+//   //background: rgba(21, 21, 21, 0.5);
+// }
 
 .kenzap .kenzap-testimonials-2 .testimonial-box{
   text-align:center;

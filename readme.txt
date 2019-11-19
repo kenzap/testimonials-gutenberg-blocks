@@ -73,3 +73,4 @@ New: Typography settings introduced
 New: Background image optimization setting
 Update: CSS improvements
 Update: Vulnerability fix
+Update: Testimonial 2. Hidden before element removed resulted in blocking click events for all page
